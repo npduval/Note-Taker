@@ -1,8 +1,8 @@
 const express = require("express");
-const notes = require("./db/db.json");
+// const notes = require("./db/db.json");
 const path = require("path");
 const fs = require("fs");
-
+const {readFromFile, writeToFile, readAndAppend } = require("./develop/file-handler");
 
 const PORT = process.env.PORT || 3001;
 
@@ -24,7 +24,9 @@ app.get("/notes", (req, res) => {
   });
 
 
-
+app.get("/api/notes", (req, res) => {
+  readFromFile("./db/db.json").then((data) => res.json(JSON.parse(data)));
+  });
 
 
 
