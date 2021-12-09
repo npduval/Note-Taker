@@ -23,4 +23,4 @@ const readAndAppend = (content, file) => {
   });
 };
 
-module.exports = {readFromFile, readAndAppend}
+module.exports = {readFromFile, writeToFile, readAndAppend}

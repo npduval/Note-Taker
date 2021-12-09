@@ -1,7 +1,9 @@
 const express = require("express");
 const path = require("path");
+const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
-const {readFromFile, readAndAppend} = require("./develop/file-handler");
+const {readFromFile, writeToFile, readAndAppend} = require("./develop/file-handler");
+const { text } = require("express");
 
 const PORT = process.env.PORT || 3001;
 
@@ -9,7 +11,7 @@ const app = express();
 
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true })); 
 
 app.use(express.static("public"));
 
@@ -35,6 +37,7 @@ app.post("/api/notes", (req, res) => {
     const newNote = {
      title,
      text,
+     id: uuidv4(),
     };
 
     readAndAppend(newNote, './db/db.json');
@@ -44,6 +47,18 @@ app.post("/api/notes", (req, res) => {
   } 
 });
 
+app.delete("/api/notes/:id", (req, res) => {
+  
+  const noteId = req.params.id;
+  
+  readFromFile("./db/db.json")
+  .then((data) => JSON.parse(data))
+  .then((parsed) => {
+      const newNotes = parsed.filter((text) => text.id !== noteId);  
+      writeToFile("./db/db.json", newNotes);
+      res.json("Note has been deleted");
+    });
+  });
 
 
   app.listen(PORT, function() {

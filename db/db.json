@@ -1,19 +1,7 @@
 [
     {
-        "title": "Test Title",
-        "text": "Test text"
-    },
-    {
-        "title": "Test Title 2",
-        "text": "Test text 2"
-    },
-    {
-        "title": "Saturday",
-        "text": "Get drunk",
-        "id": "7cba107b-77b6-4fcc-b0cd-d7746f2254a7"
-    },
-    {
-        "title": "Winner",
-        "text": "Chicken Dinner"
+        "title": "Monday",
+        "text": "Take out the trash",
+        "id": "0a6c920c-f0bc-48c8-8aa5-d7f7b279258a"
     }
 ]
